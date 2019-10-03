@@ -1,0 +1,20 @@
+version: '3'
+services:
+  nginx:
+    volumes:
+      - $PORTFOLIO_FRONTEND:/portfolio-frontend
+      - $PORTFOLIO_STATIC:/portfolio-static
+      - $PORTFOLIO_MEDIA:/portfolio-media
+      - $PORTFOLIO_PROTECTED:/portfolio-protected
+    networks:
+      cas_casnet:
+        aliases:
+          - $BASE_HOSTNAME
+      portfolio-backend_portfolionet:
+        aliases:
+          - $BASE_HOSTNAME
+networks:
+  cas_casnet:
+    external: true
+  portfolio-backend_portfolionet:
+    external: true

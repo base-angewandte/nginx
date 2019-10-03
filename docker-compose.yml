@@ -1,0 +1,26 @@
+version: '3'
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx-alpine/Dockerfile
+    container_name: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./conf.d/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./conf.d/includes:/etc/nginx/i
+      - ./logs:/var/log/nginx
+      - $SSL_CERT:/etc/nginx/ssl/certificate.crt
+      - $SSL_KEY:/etc/nginx/ssl/certificate.key
+    restart: always
+
+  nginx-cron:
+    image: paradoxon/alpine-cron
+    container_name: nginx-cron
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./docker/cron/crontab:/tmp/crontab
+    network_mode: "none"
+    restart: always
