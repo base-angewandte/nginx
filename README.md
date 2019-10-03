@@ -59,4 +59,7 @@
 
 	# update
 	make update
+
+	# generate self-signed cert
+	make generate-selfsigned-cert
 	```
