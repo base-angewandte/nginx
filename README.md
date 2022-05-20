@@ -1,65 +1,75 @@
 # Deployment
 
-* Create system user
-* Install docker and docker-compose
-* Change user:
-	
-	```bash
-	sudo su - base
-	```
-		
-* Clone git repository:
+- Create system user
+- Install docker and docker-compose
+- Change user:
 
-	```bash
-	git clone https://github.com/base-angewandte/nginx.git
-	cd nginx
-	```
+  ```bash
+  sudo su - base
+  ```
 
-* Create `.env` and adapt the settings:
+- Clone git repository:
 
-	```	bash
-	cp env-skel .env
-	vi .env
-	```
+  ```bash
+  git clone https://github.com/base-angewandte/nginx.git
+  cd nginx
+  ```
 
-* Check and adapt `nginx.conf`:
+- Create `.env` and adapt the settings:
 
-	```bash
-	cp conf.d/nginx.template conf.d/nginx.conf
-	vi conf.d/nginx.conf
-	```
+  ```bash
+  cp env-skel .env
+  vi .env
+  ```
 
-* Create and adapt `docker-compose.override.yml`:
+- Create and adapt `docker-compose.override.yml`:
 
-	```bash
-	cp docker-compose.override.skel.yml docker-compose.override.yml
-	vi docker-compose.override.yml
-	```
+  ```bash
+  cp docker-compose.override.skel.yml docker-compose.override.yml
+  vi docker-compose.override.yml
+  ```
 
-* Use Makefile with `sudo`:
+  If you want to activate all configurations you need to set the following:
 
-	```bash
-	# start
-	make start
-	
-	# stop
-	make stop
-	
-	# restart
-	make restart
-		
-	# build
-	make build
-		
-	# git pull
-	make git-update
+  ```
+  environment:
+    - CAS=
+    - PORTFOLIO=
+  ```
 
-	# rotate logfile
-	make logrotate
+- Initialize Let's Encrypt:
 
-	# update
-	make update
+  ```bash
+  make init
+  ```
 
-	# generate self-signed cert
-	make generate-selfsigned-cert
-	```
+- Use Makefile with `sudo`:
+
+  ```bash
+  # start
+  make start
+
+  # stop
+  make stop
+
+  # restart
+  make restart
+
+  # build
+  make build
+
+  # git pull
+  make git-update
+
+  # reload
+  make reload
+
+  # rotate logfile
+  make logrotate
+
+  # update
+  make update
+
+  # initialize Let's Encrypt
+  make init
+  ```

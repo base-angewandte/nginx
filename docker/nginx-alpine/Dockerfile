@@ -1,4 +1,4 @@
-FROM nginx:1.17-alpine
+FROM nginx:1.21.6-alpine
 ENV TZ Europe/Vienna
 
 RUN rm -rfv /etc/nginx/conf.d

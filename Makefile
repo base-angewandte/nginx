@@ -18,6 +18,7 @@ git-update:
 	if [ "$(shell whoami)" != "base" ]; then sudo -u base git pull; else git pull; fi
 
 reload:
+	docker-compose exec nginx nginx -t
 	docker-compose kill -s HUP nginx
 
 logrotate:
@@ -25,6 +26,5 @@ logrotate:
 
 update: git-update start
 
-generate-selfsigned-cert:
-	docker build -t openssl ./docker/openssl
-	docker run -it -v `pwd`:/work openssl openssl req -newkey rsa:2048 -nodes -keyout /work/selfsigned.key -x509 -days 365 -out /work/selfsigned.crt
+init:
+	./init-letsencrypt.sh

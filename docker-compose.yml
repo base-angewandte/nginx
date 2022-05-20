@@ -1,19 +1,32 @@
-version: '3'
+version: "3"
 services:
+  certbot:
+    image: certbot/certbot
+    container_name: nginx-certbot
+    volumes:
+      - ./dockerdata/certbot/conf:/etc/letsencrypt
+      - ./dockerdata/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    restart: always
   nginx:
     build:
       context: .
       dockerfile: ./docker/nginx-alpine/Dockerfile
     container_name: nginx
     ports:
-      - 80:80
-      - 443:443
+      - "80:80"
+      - "443:443"
+    environment:
+      - NGINX_HOST=$BASE_HOSTNAME
+      # set environment variable in override from # to empty to activate
+      - CAS=#
+      - PORTFOLIO=#
     volumes:
-      - ./conf.d/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./templates:/etc/nginx/templates
       - ./conf.d/includes:/etc/nginx/i
       - ./logs:/var/log/nginx
-      - $SSL_CERT:/etc/nginx/ssl/certificate.crt
-      - $SSL_KEY:/etc/nginx/ssl/certificate.key
+      - ./dockerdata/certbot/conf:/etc/letsencrypt
+      - ./dockerdata/certbot/www:/var/www/certbot
     restart: always
 
   nginx-cron:

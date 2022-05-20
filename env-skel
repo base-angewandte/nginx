@@ -1,7 +1,9 @@
-BASE_HOSTNAME=URL
+BASE_HOSTNAME=<url>
 PORTFOLIO_FRONTEND=/opt/base/portfolio-frontend/dist
 PORTFOLIO_STATIC=/opt/base/portfolio-backend/dockerdata/django/assets/static
 PORTFOLIO_MEDIA=/opt/base/portfolio-backend/dockerdata/django/assets/media
 PORTFOLIO_PROTECTED=/opt/base/portfolio-backend/dockerdata/django/assets/protected
 SSL_CERT=/etc/ssl/certs/cert.crt
 SSL_KEY=/etc/ssl/private/cert.key
+LETSENCRYPT_EMAIL=<e-mail>
+LETSENCRYPT_STAGING=0

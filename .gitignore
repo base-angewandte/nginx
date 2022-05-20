@@ -2,4 +2,3 @@ conf.d/nginx.conf
 docker-compose.override.yml
 .env
 logs/
-selfsigned.*

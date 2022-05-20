@@ -14,8 +14,8 @@ include i/tcp.conf;
 include i/gzip.conf;
 
 # upstreams
-# include i/cas-upstream.conf;
-# include i/portfolio-upstream.conf;
+${CAS} include i/cas-upstream.conf;
+${PORTFOLIO} include i/portfolio-upstream.conf;
 
 server {
   access_log /var/log/nginx/access.log timed_main buffer=16k flush=5m;
@@ -35,9 +35,14 @@ server {
   # ipv6
   listen [::]:80 deferred;
 
-  server_name URL;
+  server_name ${NGINX_HOST};
 
-  return 301 https://$host$request_uri;
+  include i/certbot.conf;
+
+  # Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.
+  location / {
+    return 301 https://$host$request_uri;
+  }
 }
 
 server {
@@ -52,10 +57,13 @@ server {
 
   include i/client.conf;
 
-  server_name URL;
+  server_name ${NGINX_HOST};
 
   include i/keepalive.conf;
 
+  # SSL
+  ssl_certificate /etc/letsencrypt/live/${NGINX_HOST}/fullchain.pem;
+  ssl_certificate_key /etc/letsencrypt/live/${NGINX_HOST}/privkey.pem;
   include i/ssl.conf;
 
   # include i/hsts.conf;
@@ -63,7 +71,7 @@ server {
   include i/resolver.conf;
 
   # rules
-  # include i/cas.conf;
-  # include i/portfolio.conf;
+  ${CAS} include i/cas.conf;
+  ${PORTFOLIO} include i/portfolio.conf;
 
 }

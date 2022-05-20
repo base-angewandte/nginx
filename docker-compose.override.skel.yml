@@ -1,6 +1,8 @@
 version: '3'
 services:
   nginx:
+    # environment:
+    #  -
     volumes:
       - $PORTFOLIO_FRONTEND:/portfolio-frontend
       - $PORTFOLIO_STATIC:/portfolio-static
