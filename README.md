@@ -33,7 +33,6 @@
 
   ```yaml
   environment:
-    - BASE_STATIC=
     - CAS=
     - PORTFOLIO=
   ```
