@@ -42,7 +42,7 @@ server {
   include i/resolver.conf;
 
   # rules
-  ${BASE_STATIC} include i/base-static.conf;
+  include i/base-static.conf;
   ${CAS} include i/cas.conf;
   ${PORTFOLIO} include i/portfolio.conf;
 
