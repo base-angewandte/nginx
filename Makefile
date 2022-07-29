@@ -25,6 +25,3 @@ logrotate:
 	docker-compose exec nginx sh -c '/scripts/logrotate.sh'
 
 update: git-update start
-
-init:
-	./init-letsencrypt.sh

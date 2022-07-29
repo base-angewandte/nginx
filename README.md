@@ -37,30 +37,6 @@
     - PORTFOLIO=
   ```
 
-- Initialize Let's Encrypt:
-
-  ```bash
-  make init
-  ```
-
-  If you don't want to use Let's Encrypt, but your own certificates, skip this step and do the following:
-
-  - Disable certbot by adding the following to the override file:
-
-  ```yaml
-  certbot:
-    deploy:
-      replicas: 0
-  ```
-
-  - Mount your certificate and key in the override file:
-
-  ```yaml
-  volumes:
-    - /path/to/own/certificate.pem:/etc/letsencrypt/live/${BASE_HOSTNAME}/fullchain.pem
-    - /path/to/own/certificate/key.pem:/etc/letsencrypt/live/${BASE_HOSTNAME}/privkey.pem
-  ```
-
   - Start the project with `make start`
 
 - Use Makefile with `sudo`:
@@ -89,7 +65,4 @@
 
   # update
   make update
-
-  # initialize Let's Encrypt
-  make init
   ```
