@@ -12,6 +12,7 @@
 
   ```bash
   git clone https://github.com/base-angewandte/nginx.git
+  git checkout 80
   cd nginx
   ```
 
