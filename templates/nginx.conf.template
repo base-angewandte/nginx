@@ -13,6 +13,8 @@ include i/tcp.conf;
 
 include i/gzip.conf;
 
+merge_slashes off;
+
 # upstreams
 ${CAS} include i/cas-upstream.conf;
 ${PORTFOLIO} include i/portfolio-upstream.conf;
