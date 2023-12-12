@@ -29,12 +29,29 @@
   vi docker-compose.override.yml
   ```
 
-  If you want to activate all configurations you need to set the following:
+  If you want to activate all configurations you need to minimally set the following:
 
   ```yaml
   environment:
-    - CAS=
+    # activate the following (empty) environment variables to activate those services
+    - BASEAUTH=
     - PORTFOLIO=
+  ```
+
+  These settings are set to `#` by default (see the _docker-compose.yml_ file) and
+  will comment out the respective nginx configurations. By setting it to an empty string,
+  the relevant nginx config sections will be enabled.
+
+  Additionally, you can use the `INDEX_REDIRECT` environment variable to redirect directly
+  to one of your apps (in this case probably portfolio is the only viable one). If you leave
+  this setting commented the default `/` will make sure that there is no redirect. This way
+  users will receive a 404 from nginx (unless you provide an _index.html_ file mounted with an
+  extra volume to _/etc/nginx/html/index.html_). So, in order to redirect e.g. to portfolio,
+  use the following:
+
+  ```yaml
+    # if the root URI "/" should redirect to an app (e.g. portfolio), uncomment this and set it to /portfolio
+    - INDEX_REDIRECT=/portfolio
   ```
 
 - Initialize Let's Encrypt:
@@ -61,7 +78,7 @@
     - /path/to/own/certificate/key.pem:/etc/letsencrypt/live/${BASE_HOSTNAME}/privkey.pem
   ```
 
-  - Start the project with `make start`
+- Start the project with `make start`
 
 - Use Makefile with `sudo`:
 

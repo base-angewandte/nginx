@@ -2,7 +2,11 @@ version: '3'
 services:
   nginx:
     # environment:
-    #  -
+      # activate the following (empty) environment variables to activate those services
+      # - BASEAUTH=
+      # - PORTFOLIO=
+      # if the root URI "/" should redirect to an app (e.g. portfolio), uncomment this and set it to /portfolio
+      # - INDEX_REDIRECT=/
     volumes:
       - $PORTFOLIO_FRONTEND:/portfolio-frontend
       - $PORTFOLIO_STATIC:/portfolio-static
