@@ -14,7 +14,7 @@ include i/tcp.conf;
 include i/gzip.conf;
 
 # upstreams
-${CAS} include i/cas-upstream.conf;
+${BASEAUTH} include i/baseauth-upstream.conf;
 ${PORTFOLIO} include i/portfolio-upstream.conf;
 
 server {
@@ -72,7 +72,7 @@ server {
 
   # rules
   include i/base-static.conf;
-  ${CAS} include i/cas.conf;
+  ${BASEAUTH} include i/baseauth.conf;
   ${PORTFOLIO} include i/portfolio.conf;
 
 }

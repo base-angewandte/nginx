@@ -9,14 +9,14 @@ services:
       - $PORTFOLIO_MEDIA:/portfolio-media
       - $PORTFOLIO_PROTECTED:/portfolio-protected
     networks:
-      cas_casnet:
+      baseauth_baseauthnet:
         aliases:
           - $BASE_HOSTNAME
       portfolio-backend_portfolionet:
         aliases:
           - $BASE_HOSTNAME
 networks:
-  cas_casnet:
+  baseauth_baseauthnet:
     external: true
   portfolio-backend_portfolionet:
     external: true

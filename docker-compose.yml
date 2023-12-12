@@ -19,7 +19,7 @@ services:
     environment:
       - NGINX_HOST=$BASE_HOSTNAME
       # set environment variable in override from # to empty to activate
-      - CAS=#
+      - BASEAUTH=#
       - PORTFOLIO=#
     volumes:
       - ./templates:/etc/nginx/templates
