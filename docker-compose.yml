@@ -21,6 +21,8 @@ services:
       # set environment variable in override from # to empty to activate
       - BASEAUTH=#
       - PORTFOLIO=#
+      # set this in override to e.g. /portfolio if the / path should redirect to that
+      - INDEX_REDIRECT=/
     volumes:
       - ./templates:/etc/nginx/templates
       - ./conf.d/includes:/etc/nginx/i

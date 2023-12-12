@@ -75,4 +75,11 @@ server {
   ${BASEAUTH} include i/baseauth.conf;
   ${PORTFOLIO} include i/portfolio.conf;
 
+  location / {
+    set $index_redirect ${INDEX_REDIRECT};
+    if ($index_redirect != '/') {
+      return 301 $index_redirect;
+    }
+  }
+
 }
