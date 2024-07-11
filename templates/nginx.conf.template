@@ -16,6 +16,7 @@ include i/gzip.conf;
 # upstreams
 ${BASEAUTH} include i/baseauth-upstream.conf;
 ${PORTFOLIO} include i/portfolio-upstream.conf;
+${SHOWROOM} include i/showroom-upstream.conf;
 
 server {
   access_log /var/log/nginx/access.log timed_main buffer=16k flush=5m;
@@ -74,6 +75,7 @@ server {
   include i/base-static.conf;
   ${BASEAUTH} include i/baseauth.conf;
   ${PORTFOLIO} include i/portfolio.conf;
+  ${SHOWROOM} include i/showroom.conf;
 
   location / {
     set $index_redirect ${INDEX_REDIRECT};

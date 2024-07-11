@@ -5,6 +5,7 @@ services:
       # activate the following (empty) environment variables to activate those services
       # - BASEAUTH=
       # - PORTFOLIO=
+      # - SHOWROOM=
       # if the root URI "/" should redirect to an app (e.g. portfolio), uncomment this and set it to /portfolio
       # - INDEX_REDIRECT=/
     volumes:
@@ -12,6 +13,7 @@ services:
       - $PORTFOLIO_STATIC:/portfolio-static
       - $PORTFOLIO_MEDIA:/portfolio-media
       - $PORTFOLIO_PROTECTED:/portfolio-protected
+      - $SHOWROOM_STATIC:/showroom-static
     networks:
       baseauth_baseauthnet:
         aliases:
@@ -19,8 +21,18 @@ services:
       portfolio-backend_portfolionet:
         aliases:
           - $BASE_HOSTNAME
+      showroom-backend_showroomnet:
+        aliases:
+          - $BASE_HOSTNAME
+      showroom-frontend_showroomnet:
+        aliases:
+          - $BASE_HOSTNAME
 networks:
   baseauth_baseauthnet:
     external: true
   portfolio-backend_portfolionet:
+    external: true
+  showroom-backend_showroomnet:
+    external: true
+  showroom-frontend_showroomnet:
     external: true
